@@ -17,15 +17,16 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import AuthModal from '../src/Components/AuthModal/AuthModal';
+import SideBar from '../src/Components/SideBar/SideBar';
 
 export const styles = {
   appBox: {
-    width: '100vw',
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100vh',
   },
+  sidebarContainer: {},
   mainContainer: {
     flex: 1,
     width: '100%',
@@ -48,6 +49,8 @@ export default function App({
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={styles.appBox}>
+          <SideBar />
+
           <Container
             sx={styles.mainContainer}
             component={'main'}
