@@ -25,7 +25,7 @@ import {
 import { AccountCircle, Home, Person } from '@mui/icons-material';
 import SidebarListItem from './SidebarListItem';
 
-export default function TopBbar({}: Props) {
+export default function SideBar({}: Props) {
   return (
     <Box
       component={'aside'}

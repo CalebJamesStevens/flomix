@@ -17,7 +17,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import AuthModal from '../src/Components/AuthModal/AuthModal';
-import TopBar from '../src/Components/TopBar/TopBar';
+import SideBar from '../src/Components/SideBar/SideBar';
 
 export const styles = {
   appBox: {
@@ -49,7 +49,7 @@ export default function App({
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={styles.appBox}>
-          <TopBar />
+          <SideBar />
 
           <Container
             sx={styles.mainContainer}
