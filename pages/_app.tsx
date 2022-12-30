@@ -3,14 +3,20 @@ import React from 'react';
 /** Types */
 import type { AppProps } from 'next/app';
 
-/** Auth0 */
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+/** Supabase */
+import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import {
+  SessionContextProvider,
+  Session,
+  useUser,
+} from '@supabase/auth-helpers-react';
 
 /** MUI */
 import theme from '../theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import AuthModal from '../src/Components/AuthModal/AuthModal';
 
 export const styles = {
   appBox: {
@@ -26,9 +32,19 @@ export const styles = {
   },
 } as const;
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps,
+}: AppProps<{
+  initialSession: Session;
+}>) {
+  const [supabaseClient] = React.useState(() => createBrowserSupabaseClient());
+
   return (
-    <UserProvider>
+    <SessionContextProvider
+      supabaseClient={supabaseClient}
+      initialSession={pageProps.initialSession}
+    >
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box sx={styles.appBox}>
@@ -39,7 +55,8 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </Container>
         </Box>
+        <AuthModal />
       </ThemeProvider>
-    </UserProvider>
+    </SessionContextProvider>
   );
 }
