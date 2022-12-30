@@ -4,26 +4,15 @@ type Props = {};
 
 /** MUI */
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import List from '@mui/material/List';
+import { Home, Person } from '@mui/icons-material';
 
 /** Components */
+import SidebarListItem from './SidebarListItem';
 
 /** Styles */
 import styles from './styles';
-import {
-  AppBar,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Toolbar,
-} from '@mui/material';
-import { AccountCircle, Home, Person } from '@mui/icons-material';
-import SidebarListItem from './SidebarListItem';
 
 export default function SideBar({}: Props) {
   return (
