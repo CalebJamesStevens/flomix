@@ -31,6 +31,28 @@ export interface Database {
           public_profile: boolean;
         };
       };
+      members_teams: {
+        Row: {
+          id: string;
+          created_at: string;
+          user_id: string;
+          team_id: string;
+          member_email: string;
+          member_phone_number: string | null;
+          member_role: string | null;
+        };
+        Insert: {};
+        Update: {};
+      };
+      teams: {
+        Row: {
+          id: string;
+          created_at: string | null;
+          team_name: string | null;
+        };
+        Insert: {};
+        Update: {};
+      };
     };
     Views: {
       [_ in never]: never;
