@@ -16,6 +16,7 @@ export interface Database {
           username: string;
           full_name: string;
           profile_picture: string | null;
+          user_id: string;
           public_profile: boolean;
         };
         Insert: {
@@ -40,6 +41,7 @@ export interface Database {
           member_email: string;
           member_phone_number: string | null;
           member_role: string | null;
+          team_manager: boolean;
         };
         Insert: {};
         Update: {};

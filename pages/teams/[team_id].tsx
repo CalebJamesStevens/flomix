@@ -29,7 +29,7 @@ type Props = {
 
 function Team({ team, members }: Props) {
   const session = useSession();
-  console.log(members);
+
   if (!session) {
     return <CircularProgress />;
   }

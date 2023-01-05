@@ -78,7 +78,11 @@ function TeamPage({ session, team, members }: Props) {
           />
           <Tab
             label='Brag Document'
-            {...a11yProps(2)}
+            {...a11yProps(3)}
+          />
+          <Tab
+            label='Settings'
+            {...a11yProps(4)}
           />
         </Tabs>
       </Box>
@@ -99,7 +103,7 @@ function TeamPage({ session, team, members }: Props) {
         id={`teams-tabpanel-1`}
         aria-labelledby={`teams-tab-1`}
       >
-        Analytics
+        Team Goals
       </Box>
       <Box
         role='tabpanel'
@@ -107,7 +111,7 @@ function TeamPage({ session, team, members }: Props) {
         id={`teams-tabpanel-2`}
         aria-labelledby={`teams-tab-2`}
       >
-        Item Three
+        Performance Reviews
       </Box>
       <Box
         role='tabpanel'
@@ -116,6 +120,14 @@ function TeamPage({ session, team, members }: Props) {
         aria-labelledby={`teams-tab-3`}
       >
         Brag Document
+      </Box>
+      <Box
+        role='tabpanel'
+        hidden={value !== 4}
+        id={`teams-tabpanel-4`}
+        aria-labelledby={`teams-tab-4`}
+      >
+        Settings
       </Box>
     </>
   );

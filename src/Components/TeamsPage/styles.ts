@@ -16,6 +16,28 @@ export const styles = {
     },
     padding: theme.spacing(1, 1),
   }),
+  tableHead: {
+    '& th': {
+      fontWeight: '600',
+    },
+  },
+  teamCellBox: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 1,
+    '& > svg': (theme: Theme) => ({
+      color: theme.palette.info.dark,
+    }),
+  },
+  tableCaption: {
+    '& div': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    '& svg': (theme: Theme) => ({
+      color: theme.palette.info.dark,
+    }),
+  },
 };
 
 export default styles;

@@ -11,20 +11,30 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-
+import FilterListIcon from '@mui/icons-material/FilterList';
 import {
   Autocomplete,
   Button,
+  Checkbox,
+  CheckboxProps,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Divider,
+  FormControl,
+  FormControlLabel,
   IconButton,
   List,
   ListItem,
 } from '@mui/material';
-import { GroupAdd } from '@mui/icons-material';
+import {
+  AdminPanelSettings,
+  Filter,
+  GroupAdd,
+  ManageAccounts,
+  Shield,
+} from '@mui/icons-material';
 
 /** Components */
 
@@ -51,7 +61,8 @@ function TeamsPage({ session }: { session: Session }) {
   const [memberships, setMemberships] = React.useState<
     (MembersTeam & { team: Teams })[] | null
   >(null);
-
+  const [onlyShowManagedTeams, setOnlyShowManagedTeams] = React.useState(false);
+  const [searchInput, setSearchInput] = React.useState('');
   const [newTeamDialogOpen, setNewTeamDialogOpen] = React.useState(false);
 
   async function getTeams() {
@@ -61,7 +72,7 @@ function TeamsPage({ session }: { session: Session }) {
 
       const { data, error, status } = await supabase
         .from('members_teams')
-        .select('*, team: teams (*)')
+        .select('*, team: teams (*), account: accounts (*)')
         .eq('user_id', user.id);
 
       if (status === 200 && data) {
@@ -79,7 +90,20 @@ function TeamsPage({ session }: { session: Session }) {
     getTeams();
   }, [session]);
 
-  const filteredMemberships = memberships;
+  let filteredMemberships = memberships;
+  if (onlyShowManagedTeams && memberships) {
+    filteredMemberships = memberships.filter(
+      (membership) => membership.team_manager
+    );
+  }
+
+  if (searchInput && filteredMemberships) {
+    filteredMemberships = filteredMemberships.filter((membership) => {
+      return membership.team.team_name
+        ?.toLocaleLowerCase()
+        .includes(searchInput.toLocaleLowerCase());
+    });
+  }
 
   return (
     <Box>
@@ -99,6 +123,8 @@ function TeamsPage({ session }: { session: Session }) {
               <TextField
                 {...params}
                 label='Search Teams'
+                value={searchInput}
+                onChange={(event) => setSearchInput(event.target.value)}
                 InputProps={{
                   ...params.InputProps,
                   type: 'search',
@@ -128,27 +154,22 @@ function TeamsPage({ session }: { session: Session }) {
                   ...new FormData(event.currentTarget).entries(),
                 ]);
 
-                const { data, status } = await supabase
-                  .from('teams')
-                  .insert({ team_name: formData.team_name })
-                  .select()
-                  .single();
+                let { data, error } = await supabase.rpc('handle_new_team', {
+                  team_name: formData.team_name,
+                });
 
-                if (status === 201 && data) {
-                  const membersTeams = await supabase
-                    .from('members_teams')
-                    .insert({
-                      team_id: data.id,
-                      user_id: user.id,
-                    });
-
-                  if (membersTeams.status === 201) {
-                    alert('Success');
-                  } else {
-                    alert('Error');
-                  }
+                if (error) {
+                  console.error(error);
                 } else {
-                  alert('Error');
+                  setMemberships((previousMemberships) => {
+                    if (previousMemberships) {
+                      const copy = [...previousMemberships];
+                      copy.push(data);
+                      return copy;
+                    } else {
+                      return [data];
+                    }
+                  });
                 }
 
                 setNewTeamDialogOpen(false);
@@ -179,8 +200,27 @@ function TeamsPage({ session }: { session: Session }) {
             </Box>
           </Dialog>
         </Box>
+        <FormControlLabel
+          label='Only Show Teams Managed By Me'
+          control={
+            <Checkbox
+              onClick={() =>
+                setOnlyShowManagedTeams((previousValue) => !previousValue)
+              }
+              checked={onlyShowManagedTeams}
+            />
+          }
+        />
         <Table>
-          <TableHead>
+          <Box
+            component={'caption'}
+            sx={styles.tableCaption}
+          >
+            <Box>
+              <Shield />: You manage this team
+            </Box>
+          </Box>
+          <TableHead sx={styles.tableHead}>
             <TableRow>
               <TableCell>Team</TableCell>
               <TableCell>Your Role</TableCell>
@@ -196,9 +236,15 @@ function TeamsPage({ session }: { session: Session }) {
                       key={membership.team.id}
                     >
                       <TableCell>
-                        <Button href={`/teams/${membership.team.id}`}>
-                          <Typography>{membership.team.team_name}</Typography>
-                        </Button>
+                        <Box sx={styles.teamCellBox}>
+                          <Shield />
+                          <Button
+                            variant='contained'
+                            href={`/teams/${membership.team.id}`}
+                          >
+                            <Typography>{membership.team.team_name}</Typography>
+                          </Button>
+                        </Box>
                       </TableCell>
                       <TableCell>
                         <Typography>{membership.member_role}</Typography>

@@ -1,5 +1,8 @@
 import React from 'react';
 
+/** Styles */
+import styles from './styles';
+
 /** MUI */
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -39,7 +42,7 @@ function MembersTab({ team, members }: Props) {
     <Box>
       <Typography variant='h1'>{team.team_name}</Typography>
       <Table>
-        <TableHead>
+        <TableHead sx={styles.tableHead}>
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Role</TableCell>
