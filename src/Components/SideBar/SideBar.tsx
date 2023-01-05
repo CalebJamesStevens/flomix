@@ -6,7 +6,7 @@ type Props = {};
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import { Home, Person } from '@mui/icons-material';
+import { Groups, Home, Person } from '@mui/icons-material';
 
 /** Components */
 import SidebarListItem from './SidebarListItem';
@@ -31,6 +31,11 @@ export default function SideBar({}: Props) {
           label='Account'
           Icon={<Person />}
           href='/account'
+        />
+        <SidebarListItem
+          label='Teams'
+          Icon={<Groups />}
+          href='/teams'
         />
       </List>
     </Box>
