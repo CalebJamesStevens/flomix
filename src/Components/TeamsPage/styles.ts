@@ -24,6 +24,7 @@ export const styles = {
   teamCellBox: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     gap: 1,
     '& > svg': (theme: Theme) => ({
       color: theme.palette.info.dark,

@@ -48,12 +48,38 @@ export interface Database {
       };
       teams: {
         Row: {
-          id: string;
+          team_id: string;
           created_at: string | null;
           team_name: string | null;
+          enable_roles: boolean;
+          enable_email: boolean;
+          enable_phone: boolean;
         };
-        Insert: {};
-        Update: {};
+        Insert: {
+          team_name: string;
+          enable_roles: boolean;
+          enable_email: boolean;
+          enable_phone: boolean;
+        };
+        Update: {
+          team_name: string;
+          enable_roles: boolean;
+          enable_email: boolean;
+          enable_phone: boolean;
+        };
+      };
+      team_roles: {
+        Row: {
+          role_id: string;
+          team_id: string;
+          role_name: string;
+        };
+        Insert: {
+          role_name: string;
+        };
+        Update: {
+          role_name: string;
+        };
       };
     };
     Views: {

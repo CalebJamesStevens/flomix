@@ -2,8 +2,6 @@ import React from 'react';
 
 /** MUI */
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Table from '@mui/material/Table';
@@ -11,30 +9,16 @@ import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import FilterListIcon from '@mui/icons-material/FilterList';
-import {
-  Autocomplete,
-  Button,
-  Checkbox,
-  CheckboxProps,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  FormControl,
-  FormControlLabel,
-  IconButton,
-  List,
-  ListItem,
-} from '@mui/material';
-import {
-  AdminPanelSettings,
-  Filter,
-  GroupAdd,
-  ManageAccounts,
-  Shield,
-} from '@mui/icons-material';
+import Autocomplete from '@mui/material/Autocomplete';
+import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import GroupAdd from '@mui/icons-material/GroupAdd';
+import Shield from '@mui/icons-material/Shield';
 
 /** Components */
 
@@ -233,17 +217,17 @@ function TeamsPage({ session }: { session: Session }) {
                   return (
                     <TableRow
                       hover
-                      key={membership.team.id}
+                      key={membership.team.team_id}
                     >
                       <TableCell>
                         <Box sx={styles.teamCellBox}>
-                          <Shield />
                           <Button
                             variant='contained'
-                            href={`/teams/${membership.team.id}`}
+                            href={`/teams/${membership.team.team_id}`}
                           >
                             <Typography>{membership.team.team_name}</Typography>
                           </Button>
+                          {membership.team_manager ? <Shield /> : null}
                         </Box>
                       </TableCell>
                       <TableCell>
