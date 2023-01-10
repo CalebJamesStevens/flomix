@@ -1,45 +1,34 @@
 import React from 'react';
 
 /** Supabase */
-import {
-  useUser,
-  useSupabaseClient,
-  Session,
-} from '@supabase/auth-helpers-react';
+import { Session } from '@supabase/auth-helpers-react';
 import { Database } from '../../../utils/supabase/database/database.types';
 
 /** MUI */
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 
 /** Components */
+import SettingsTab from './SettingsTab/SettingsTab';
 
 /** Styles */
 import styles from './styles';
-import {
-  List,
-  ListItem,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Tabs,
-} from '@mui/material';
-import MembersTab from './MembersTab/MembersTab';
 
-type Team = Database['public']['Tables']['teams']['Row'];
+import MembersTab from './MembersTab/MembersTab';
+import { useRouter } from 'next/router';
+
+type TeamTable = Database['public']['Tables']['teams']['Row'];
 type Account = Database['public']['Tables']['accounts']['Row'];
 type MembersTeam = Database['public']['Tables']['members_teams']['Row'];
-type Member = MembersTeam & { account: Account };
+type Team_Roles = Database['public']['Tables']['team_roles']['Row'];
+type Member = MembersTeam & Account;
+
+type Team = TeamTable & { members: Member[] } & { roles: Team_Roles[] };
 
 type Props = {
   team: Team;
   session: Session;
-  members: Member[];
 };
 
 function a11yProps(index: number) {
@@ -49,8 +38,26 @@ function a11yProps(index: number) {
   };
 }
 
-function TeamPage({ session, team, members }: Props) {
-  const [value, setValue] = React.useState(0);
+function TeamPage({ session, team }: Props) {
+  const router = useRouter();
+  const hashMap = {
+    '#members': 0,
+    '': 0,
+    '#team-goals': 1,
+    '#performance-reviews': 2,
+    '#brag-document': 3,
+    '#settings': 4,
+  };
+
+  const [value, setValue] = React.useState(hashMap[window.location.hash]);
+
+  React.useEffect(() => {
+    setValue(hashMap[window.location.hash]);
+  }, [router.asPath]);
+
+  const userMember = team.members.find(
+    (member) => member.user_id === session.user.id
+  );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -63,27 +70,36 @@ function TeamPage({ session, team, members }: Props) {
           value={value}
           onChange={handleChange}
           aria-label='Team Tabs'
+          scrollButtons='auto'
+          variant='scrollable'
         >
           <Tab
             label='Members'
+            onClick={() => router.push('#members')}
             {...a11yProps(0)}
           />
           <Tab
             label='Team Goals'
+            onClick={() => router.push('#team-goals')}
             {...a11yProps(1)}
           />
           <Tab
             label='Preformance Reviews'
+            onClick={() => router.push('#performance-reviews')}
             {...a11yProps(2)}
           />
           <Tab
             label='Brag Document'
+            onClick={() => router.push('#brag-document')}
             {...a11yProps(3)}
           />
-          <Tab
-            label='Settings'
-            {...a11yProps(4)}
-          />
+          {userMember?.team_manager ? (
+            <Tab
+              label='Settings'
+              onClick={() => router.push('#settings')}
+              {...a11yProps(4)}
+            />
+          ) : null}
         </Tabs>
       </Box>
       <Box
@@ -92,10 +108,7 @@ function TeamPage({ session, team, members }: Props) {
         id={`teams-tabpanel-0`}
         aria-labelledby={`teams-tab-0`}
       >
-        <MembersTab
-          team={team}
-          members={members}
-        />
+        <MembersTab team={team} />
       </Box>
       <Box
         role='tabpanel'
@@ -121,14 +134,16 @@ function TeamPage({ session, team, members }: Props) {
       >
         Brag Document
       </Box>
-      <Box
-        role='tabpanel'
-        hidden={value !== 4}
-        id={`teams-tabpanel-4`}
-        aria-labelledby={`teams-tab-4`}
-      >
-        Settings
-      </Box>
+      {userMember?.team_manager ? (
+        <Box
+          role='tabpanel'
+          hidden={value !== 4}
+          id={`teams-tabpanel-4`}
+          aria-labelledby={`teams-tab-4`}
+        >
+          <SettingsTab team={team} />
+        </Box>
+      ) : null}
     </>
   );
 }

@@ -5,39 +5,28 @@ import styles from './styles';
 
 /** MUI */
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 /** Components */
-
-/** MUI */
-import {
-  List,
-  ListItem,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Tabs,
-} from '@mui/material';
 
 /** Supabase */
 import { Database } from '../../../../utils/supabase/database/database.types';
 
-type Team = Database['public']['Tables']['teams']['Row'];
+type TeamTable = Database['public']['Tables']['teams']['Row'];
 type Account = Database['public']['Tables']['accounts']['Row'];
 type MembersTeam = Database['public']['Tables']['members_teams']['Row'];
-type Member = MembersTeam & { account: Account };
-
+type Member = MembersTeam & Account;
+type Team = TeamTable & { members: Member[] } & { roles: {} };
 type Props = {
   team: Team;
-  members: Member[];
 };
 
-function MembersTab({ team, members }: Props) {
+function MembersTab({ team }: Props) {
   return (
     <Box>
       <Typography variant='h1'>{team.team_name}</Typography>
@@ -50,10 +39,10 @@ function MembersTab({ team, members }: Props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {members.map((member) => {
+          {team.members.map((member) => {
             return (
               <TableRow key={member.id}>
-                <TableCell>{member.account.full_name}</TableCell>
+                <TableCell>{member.full_name}</TableCell>
                 <TableCell>{member.member_role}</TableCell>
                 <TableCell>{member.member_email || 'No Email Setup'}</TableCell>
               </TableRow>
