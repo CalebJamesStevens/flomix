@@ -13,11 +13,18 @@ import {
 
 /** MUI */
 import theme from '../theme';
-import { CssBaseline, ThemeProvider } from '@mui/material';
+import {
+  Alert,
+  CssBaseline,
+  Snackbar,
+  ThemeProvider,
+  Toolbar,
+} from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import AuthModal from '../src/Components/AuthModal/AuthModal';
 import SideBar from '../src/Components/SideBar/SideBar';
+import useStoreReducer from '../src/utils/state/useStoreReducer/useStoreReducer';
 
 export const styles = {
   appBox: {
@@ -34,6 +41,8 @@ export const styles = {
   },
 } as const;
 
+export const Store = React.createContext({});
+
 export default function App({
   Component,
   pageProps,
@@ -41,26 +50,46 @@ export default function App({
   initialSession: Session;
 }>) {
   const [supabaseClient] = React.useState(() => createBrowserSupabaseClient());
+  const [globalStore, globalDispatch] = useStoreReducer();
 
   return (
-    <SessionContextProvider
-      supabaseClient={supabaseClient}
-      initialSession={pageProps.initialSession}
-    >
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Box sx={styles.appBox}>
-          <SideBar />
+    <Store.Provider value={{ globalStore, globalDispatch }}>
+      <SessionContextProvider
+        supabaseClient={supabaseClient}
+        initialSession={pageProps.initialSession}
+      >
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Box sx={styles.appBox}>
+            <SideBar />
 
-          <Container
-            sx={styles.mainContainer}
-            component={'main'}
+            <Container
+              sx={styles.mainContainer}
+              component={'main'}
+            >
+              <Component {...pageProps} />
+            </Container>
+          </Box>
+          <AuthModal />
+          <Snackbar
+            open={!!globalStore.message}
+            autoHideDuration={globalStore.data?.duration || 5000}
+            onClose={() => {
+              globalDispatch({
+                type: 'toast',
+                payload: {
+                  message: '',
+                  data: undefined,
+                },
+              });
+            }}
           >
-            <Component {...pageProps} />
-          </Container>
-        </Box>
-        <AuthModal />
-      </ThemeProvider>
-    </SessionContextProvider>
+            <Alert severity={globalStore.data?.severity}>
+              {globalStore.message || ''}
+            </Alert>
+          </Snackbar>
+        </ThemeProvider>
+      </SessionContextProvider>
+    </Store.Provider>
   );
 }

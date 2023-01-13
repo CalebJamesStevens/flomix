@@ -108,7 +108,10 @@ function TeamPage({ session, team }: Props) {
         id={`teams-tabpanel-0`}
         aria-labelledby={`teams-tab-0`}
       >
-        <MembersTab team={team} />
+        <MembersTab
+          team={team}
+          userMember={userMember}
+        />
       </Box>
       <Box
         role='tabpanel'
