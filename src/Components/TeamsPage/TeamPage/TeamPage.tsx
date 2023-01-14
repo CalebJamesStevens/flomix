@@ -22,7 +22,7 @@ type TeamTable = Database['public']['Tables']['teams']['Row'];
 type Account = Database['public']['Tables']['accounts']['Row'];
 type MembersTeam = Database['public']['Tables']['members_teams']['Row'];
 type Team_Roles = Database['public']['Tables']['team_roles']['Row'];
-type Member = MembersTeam & Account;
+type Member = MembersTeam & Account & Team_Roles;
 
 type Team = TeamTable & { members: Member[] } & { roles: Team_Roles[] };
 

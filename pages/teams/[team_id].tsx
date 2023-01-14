@@ -1,5 +1,5 @@
 import { CircularProgress } from '@mui/material';
-import React from 'react';
+import React, { Dispatch, DispatchWithoutAction } from 'react';
 import TeamPage from '../../src/Components/TeamsPage/TeamPage/TeamPage';
 
 /** Supabase */
@@ -13,24 +13,61 @@ type TeamTable = Database['public']['Tables']['teams']['Row'];
 type Account = Database['public']['Tables']['accounts']['Row'];
 type Team_Roles = Database['public']['Tables']['team_roles']['Row'];
 type MembersTeam = Database['public']['Tables']['members_teams']['Row'];
-type Member = MembersTeam & Account;
-type Team = TeamTable & { members: Member[] } & { roles: Team_Roles[] };
+type Member = MembersTeam & Account & Team_Roles;
+type TeamWithMembersAndRoles = TeamTable & { members: Member[] } & {
+  roles: Team_Roles[];
+};
 
 type Props = {
-  team: Team;
+  team: TeamWithMembersAndRoles;
+};
+
+type Action = {
+  type: 'updateTeam' | 'updateMember' | 'updateRoles';
+  payload: any;
+};
+
+export const TeamContext = React.createContext<{
+  teamState: TeamWithMembersAndRoles | null;
+  dispatch: Dispatch<Action> | null;
+}>({
+  teamState: null,
+  dispatch: null,
+});
+
+const teamReducer = (state: TeamWithMembersAndRoles, action: Action) => {
+  switch (action.type) {
+    case 'updateMember': {
+      const members = JSON.parse(JSON.stringify(state.members));
+      members.forEach((member: MembersTeam, index) => {
+        if (member.id === action.payload.memberId) {
+          members[index] = action.payload.memberData;
+        }
+      });
+
+      return {
+        ...state,
+        members: members,
+      };
+    }
+  }
 };
 
 function Team({ team }: Props) {
   const session = useSession();
+  const [teamState, dispatch] = React.useReducer(teamReducer, team);
+
   if (!session) {
     return <CircularProgress />;
   }
 
   return (
-    <TeamPage
-      session={session}
-      team={team}
-    />
+    <TeamContext.Provider value={{ teamState, dispatch }}>
+      <TeamPage
+        session={session}
+        team={teamState}
+      />
+    </TeamContext.Provider>
   );
 }
 
