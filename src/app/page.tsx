@@ -1,95 +1,181 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Theme,
+  Typography,
+} from '@mui/material';
+import Image from 'next/image';
+import WebIcon from '@mui/icons-material/Web';
+import CodeIcon from '@mui/icons-material/Code';
+import MobileFriendlyIcon from '@mui/icons-material/MobileFriendly';
+import CloudQueueIcon from '@mui/icons-material/CloudQueue';
+import EngineeringIcon from '@mui/icons-material/Engineering';
+import { Breakpoint } from '@/components/Breakpoint/Breakpoint';
+import About from '@/components/About/About';
+import Mobile from '@/components/HeroSection/Mobile';
+import Desktop from '@/components/HeroSection/Desktop';
+import Contact from '@/components/Contact/Contact';
+import SocialProof from '@/components/SocialProof/SocialProof';
+import theme from '@/components/ThemeRegistry/theme';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <Stack component={'main'} paddingTop={8}  spacing={14}>
+      <Breakpoint breakpoint='md' direction='down'>
+        <Mobile />
+      </Breakpoint>
+      <Breakpoint breakpoint='md' direction='up'>
+        <Desktop />
+      </Breakpoint>
+      <Stack
+      id='services'
+        justifyContent='center'
+        alignItems={'center'}
+        component={'section'}
+        spacing={4}
+      >
+        <Box>
+          <Typography textAlign={'center'} variant='h2'>
+            What do we offer?
+          </Typography>
+          <Typography textAlign={'center'}>
+            Flomix offers a comprehensive range of services to elevate your
+            online presence and stand out in the digital landscape.
+          </Typography>
+        </Box>
+        <Container>
+          <Stack justifyContent={'center'} alignItems={'center'}>
+            <Grid
+              marginLeft={0}
+              justifyContent={'center'}
+              container
+              spacing={8}
+            >
+              <Grid
+                sx={{
+                  paddingLeft: '2rem !important',
+                  paddingRight: '2rem !important',
+                  maxWidth: '350px',
+                }}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+              >
+                <Card sx={{ padding: 4, height: '100%' }} title='Development'>
+                  <CodeIcon sx={{ height: '5rem', width: '5rem' }} />
+                  <Typography component='p' fontSize='2rem' fontWeight='500'>
+                    Development
+                  </Typography>
+                  <Typography marginTop='1rem' variant='body2'>
+                    Crafting tailored web solutions with cutting-edge
+                    technologies.
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid
+                sx={{
+                  paddingLeft: '2rem !important',
+                  paddingRight: '2rem !important',
+                  maxWidth: '350px',
+                }}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+              >
+                <Card sx={{ padding: 4, height: '100%' }} title='Design'>
+                  <WebIcon sx={{ height: '5rem', width: '5rem' }} />
+                  <Typography component='p' fontSize='2rem' fontWeight='500'>
+                    Design
+                  </Typography>
+                  <Typography marginTop='1rem' variant='body2'>
+                    Creating stunning, intuitive interfaces that reflect your
+                    brand.
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid
+                sx={{
+                  paddingLeft: '2rem !important',
+                  paddingRight: '2rem !important',
+                  maxWidth: '350px',
+                }}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+              >
+                <Card
+                  sx={{ padding: 4, height: '100%' }}
+                  title='Responsiveness'
+                >
+                  <MobileFriendlyIcon sx={{ height: '5rem', width: '5rem' }} />
+                  <Typography component='p' fontSize='2rem' fontWeight='500'>
+                    Responsiveness
+                  </Typography>
+                  <Typography marginTop='1rem' variant='body2'>
+                    Ensuring flawless performance across devices and screen
+                    sizes.
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid
+                sx={{
+                  paddingLeft: '2rem !important',
+                  paddingRight: '2rem !important',
+                  maxWidth: '350px',
+                }}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+              >
+                <Card sx={{ padding: 4, height: '100%' }} title='Hosting'>
+                  <CloudQueueIcon sx={{ height: '5rem', width: '5rem' }} />
+                  <Typography component='p' fontSize='2rem' fontWeight='500'>
+                    Hosting
+                  </Typography>
+                  <Typography marginTop='1rem' variant='body2'>
+                    Providing reliable and secure hosting for seamless browsing.
+                  </Typography>
+                </Card>
+              </Grid>
+              <Grid
+                sx={{
+                  paddingLeft: '2rem !important',
+                  paddingRight: '2rem !important',
+                  maxWidth: '350px',
+                }}
+                item
+                xs={12}
+                sm={6}
+                md={4}
+              >
+                <Card sx={{ padding: 4, height: '100%' }} title='Maintenance'>
+                  <EngineeringIcon sx={{ height: '5rem', width: '5rem' }} />
+                  <Typography component='p' fontSize='2rem' fontWeight='400'>
+                    Maintenance
+                  </Typography>
+                  <Typography marginTop='1rem' variant='body2'>
+                    Keeping your website up-to-date, secure, and optimized.
+                  </Typography>
+                </Card>
+              </Grid>
+            </Grid>
+          </Stack>
+        </Container>
+      </Stack>
+      <SocialProof />
+      <Box component={'section'} paddingBottom={8}>
+        <About />
+      </Box>
+      <Contact />
+    </Stack>
+  );
 }
