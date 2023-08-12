@@ -39,11 +39,11 @@ export const Banner = () => {
           justifyContent={'space-between'}
         >
           <Breakpoint direction='up' breakpoint='md'>
-            <img height={'42px'} src='/logo.svg' alt='Flomix Logo' />
+            <img height={'42px'} src='/flomixLogo.svg' alt='Flomix Logo' />
           </Breakpoint>
           <Breakpoint direction='down' breakpoint='md'>
             <Box sx={{marginX: 'auto'}}>
-              <img height={'42px'} src='/logo.svg' alt='Flomix Logo' />
+              <img height={'42px'} src='/flomixLogo.svg' alt='Flomix Logo' />
             </Box>
           </Breakpoint>
           <Breakpoint direction='up' breakpoint='sm'>
