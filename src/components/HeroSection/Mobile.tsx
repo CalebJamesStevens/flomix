@@ -18,7 +18,7 @@ export const Mobile = () => {
     >
       <Stack spacing={1}>
         <Typography textAlign={'center'} variant='h1'>
-          Expert Web Development Services for Your Business
+          Quality Websites for Small Businesses
         </Typography>
         <Typography textAlign={'center'}>
           Crafting Stunning Websites and Applications to Elevate Your Online

@@ -29,7 +29,7 @@ export const Desktop = () => {
         >
           <Stack spacing={1}>
             <Typography variant='h1'>
-              Expert Web Development Services for Your Business
+              Quality Websites for Small Businesses
             </Typography>
             <Typography width={'80%'}>
               Crafting Stunning Websites and Applications to Elevate Your Online
