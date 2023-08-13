@@ -5,8 +5,8 @@ import { Container } from '@mui/material';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Flomix',
-  description: 'Your expert web developers',
+  title: 'Flomix Web Design',
+  description: 'Web design and development for small businesses in Bend Oregon.',
 };
 
 export default function RootLayout({
