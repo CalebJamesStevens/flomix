@@ -2,27 +2,12 @@
 
 import {
   Box,
-  Button,
   Card,
   CardContent,
-  Container,
-  Grid,
   Stack,
-  TextField,
-  Theme,
   Typography,
 } from '@mui/material';
 import Image from 'next/image';
-import WebIcon from '@mui/icons-material/Web';
-import CodeIcon from '@mui/icons-material/Code';
-import MobileFriendlyIcon from '@mui/icons-material/MobileFriendly';
-import CloudQueueIcon from '@mui/icons-material/CloudQueue';
-import EngineeringIcon from '@mui/icons-material/Engineering';
-import { Breakpoint } from '@/components/Breakpoint/Breakpoint';
-import About from '@/components/About/About';
-import Mobile from '@/components/HeroSection/Mobile';
-import Desktop from '@/components/HeroSection/Desktop';
-import Contact from '@/components/Contact/Contact';
 import theme from '../ThemeRegistry/theme';
 
 export default function SocialProof() {

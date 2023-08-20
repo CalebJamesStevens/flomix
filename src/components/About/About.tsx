@@ -19,7 +19,7 @@ export const About = () => {
               height={'200px'}
               sx={{ objectFit: 'cover' }}
               component='img'
-              src='/MaddieAndDaddy.png'
+              src='/MaddieAndDaddy.jpg'
               alt='Picture of Caleb Stevens with his infant daughter'
             />
           </Box>
@@ -44,7 +44,7 @@ export const About = () => {
               sx={{ objectFit: 'cover' }}
               marginX={'auto'}
               component='img'
-              src='/MaddieAndDaddy.png'
+              src='/MaddieAndDaddy.jpg'
               alt='Picture of Caleb Stevens with his infant daughter'
             />
           </Box>
