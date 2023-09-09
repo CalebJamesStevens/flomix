@@ -8,7 +8,7 @@ export const About = () => {
   return (
     <Stack id='about' spacing={4}>
       <Typography textAlign={'center'} variant='h2'>
-        About Flomix
+        About Cross Link
       </Typography>
       <Breakpoint breakpoint='sm' direction='up'>
         <Stack direction={'row'} alignItems={'end'} spacing={4}>
@@ -27,7 +27,7 @@ export const About = () => {
             <Typography variant='h1' component={'span'}>
               Hi!
             </Typography>{' '}
-            My name is Caleb Stevens I started Flomix to serve those who value
+            My name is Caleb Stevens I started Cross Link to serve those who value
             accessible and high quality websites. Whether you&apos;re looking
             for a website for your personal portfolio, side gig, or business we
             have something for you.
@@ -53,8 +53,9 @@ export const About = () => {
           <Typography variant='h1' component={'span'}>
             Hi!
           </Typography>{' '}
-          My name is Caleb Stevens I started Flomix to serve those who value
-          accessible and high quality websites. Whether you&apos;re looking for
+          My name is Caleb Stevens and I started Cross Link to serve those who value
+          high quality and accessible websites. My faith is the driving factor being my work. I believe Christ is shown not just in Church, but
+          in the ethic, integrity, and quality of a Christian&apos;s work. Whether you&apos;re looking for
           a website for your personal portfolio, side gig, or business we have
           something for you.
         </Typography>
@@ -63,6 +64,12 @@ export const About = () => {
         <Typography variant='h3' component='p'>
           Values:
         </Typography>{' '}
+        <Typography>
+          Jesus Christ is the center of all work I do. Fair and honest pricing is something I hope to build my brand and reputation on as well as the quality of my work.
+          This means that I will not charge you for something you don&apos;t need and I will not charge you for something that I don&apos;t deliver.
+        </Typography>
+      </Box>
+      <Box>
         <Typography>
           Accessibility is at the heart of everything we do. We are committed to
           building websites that are inclusive and can be enjoyed by everyone,

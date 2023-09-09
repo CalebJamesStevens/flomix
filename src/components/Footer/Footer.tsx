@@ -6,13 +6,13 @@ export const Footer = () => {
   return (
     <Box
       sx={{
-        background: (theme) => theme.palette.secondary.main,
+        background: (theme) => theme.palette.primary.main,
         color: 'white',
         padding: 4,
         textAlign: 'center',
       }}
     >
-      Copyright Flomix @2023. All rights reserved.
+      Copyright Cross Link Design @2023. All rights reserved.
     </Box>
   );
 };

@@ -98,7 +98,7 @@ export const Contact = () => {
         <Stack alignItems={'start'} spacing={2} paddingTop={5}>
           <Button
             type='submit'
-            color='secondary'
+
             size='large'
             variant='contained'
           >
@@ -109,10 +109,10 @@ Or Email Us at{' '}
           <Link
             type='submit'
             color='secondary'
-            href='mailto:info@flomix.app'
+            href='mailto:caleb@crosslinkdesign.com'
             
           >
-            info@flomix.app
+            caleb@crosslinkdesign.com
           </Link>
           </Box>
         </Stack>

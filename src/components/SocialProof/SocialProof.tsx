@@ -43,7 +43,7 @@ export default function SocialProof() {
 
               }} alt=''/>
               <Typography lineHeight={1.7} cite='https://hannahstevens.art' component={'blockquote'}>
-              &quot;I got back into art after having a baby and needed a website to showcase my work. Flomix created a beautiful website that really emphasizes my brand and style.&quot;
+              &quot;I got back into art after having a baby and needed a website to showcase my work. Cross Link created a beautiful website that really emphasizes my brand and style.&quot;
               <Stack marginTop={1} justifyContent={'end'} component={'footer'}>
                 <Box textAlign={'end'} component={'cite'}>
                   - Hannah Stevens Art

@@ -44,7 +44,7 @@ export default function Home() {
             What do we offer?
           </Typography>
           <Typography textAlign={'center'}>
-            Flomix offers a comprehensive range of services to elevate your
+            Cross Link Design offers a comprehensive range of services to elevate your
             online presence and stand out in the digital landscape.
           </Typography>
         </Box>

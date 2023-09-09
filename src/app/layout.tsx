@@ -5,8 +5,8 @@ import { Container } from '@mui/material';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Flomix Web Design | Bend Oregon Web Design Company',
-  description: 'Flomix Web Design Bend Oregon Website Design company creating custom websites for small businesses that you can manage yourself. We serve Bend Oregon, Redmond Oregon, Prineville Oregon.',
+  title: 'Cross Link Design | Salem Oregon Web Design Company',
+  description: 'Crss Link Design is a Salem Oregon Website Design company creating custom websites for small businesses that you can manage yourself. We serve Bend Oregon, Redmond Oregon, Prineville Oregon.',
 };
 
 export default function RootLayout({

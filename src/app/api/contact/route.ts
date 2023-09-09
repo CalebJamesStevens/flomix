@@ -8,9 +8,9 @@ export async function POST(req: NextRequest) {
   mail.setApiKey(process.env.SENDGRID_API_KEY as string)
   
   const msg = {
-    to: 'calebstevens@flomix.app', 
-    from: 'calebstevens@flomix.app', 
-    subject: body?.subject ?? 'New message from flomix contact page',
+    to: 'caleb@crosslinkdesign.com', 
+    from: 'caleb@crosslinkdesign.com', 
+    subject: body?.subject ?? 'New message from Cross Link Design contact page',
     text: message + '\n' + '\n' + '------' + '\n' + 'Name: ' + name + '\n' + 'Email: '+ email + '\n'+ 'Number: ' + number,
   }
   

@@ -37,7 +37,7 @@ export const Desktop = () => {
             </Typography>
           </Stack>
           <Box>
-            <Button href='/#contact' color='secondary' size='large' variant='contained'>
+            <Button href='/#contact'  size='large' variant='contained'>
               Get In Touch
             </Button>
           </Box>
